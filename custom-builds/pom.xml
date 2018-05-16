@@ -32,6 +32,7 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>17.0</version>
+      <optional>true</optional>
       <scope>runtime</scope>
     </dependency>
 
@@ -64,12 +65,99 @@
         <configuration>
           <appClass>com.evelyn.mavenplugin.study.launch.CustomBuildsApplication</appClass>
 
+          <!--包含应用程序依赖关系-->
+          <includeAppDep>true</includeAppDep>
+
+          <!--包含基于源的依赖关系：应用程序依赖项-->
+          <includeAppDep>false</includeAppDep>
+
+          <!--包含基于源的依赖关系：插件依赖项-->
+          <includePluginDep>false</includePluginDep>
+
           <!--包含基于范围的依赖关系：runtime-->
           <includeRuntimeDep>true</includeRuntimeDep>
+
+          <!--包含optional的依赖关系： <optional>true</optional> -->
+          <includeOptionalDep>true</includeOptionalDep>
+
+          <!--包含传递依赖关系-->
+          <includeTransitiveDep>true</includeTransitiveDep>
+
+          <!--resolve：在运行时解析依赖关系-->
+
+          <!--resolve应用程序依赖关系-->
+          <resolveAppDep>true</resolveAppDep>
+
+          <!--resolve基于源的依赖关系：应用程序依赖项-->
+          <resolveAppDep>false</resolveAppDep>
+
+          <!--resolve基于源的依赖关系：插件依赖项-->
+          <resolvePluginDep>false</resolvePluginDep>
 
           <!--resolve基于范围的依赖关系：runtime-->
           <resolveRuntimeDep>true</resolveRuntimeDep>
 
+          <!--resolve optional的依赖关系： <optional>true</optional> -->
+          <resolveOptionalDep>true</resolveOptionalDep>
+
+          <!--resolve 传递依赖关系-->
+          <resolveTransitiveDep>true</resolveTransitiveDep>
+
+          <!--配置项目名称-->
+          <fileName>custom-builds</fileName>
+          <!--配置cap的后缀-->
+          <fileDesc>-cap</fileDesc>
+
+          <!--配置模式-->
+          <modes>
+            <mode>
+              <name>dev</name>
+              <manifest>
+                <entry>
+                  <key>JVM-Args</key>
+                  <value>-Xmx512m</value>
+                </entry>
+              </manifest>
+            </mode>
+            <mode>
+              <name>test</name>
+              <manifest>
+                <entry>
+                  <key>JVM-Args</key>
+                  <value>-Xmx512m -Xms512m -Xmn350m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+PrintGCDetails -XX:CMSFullGCsBeforeCompaction=5 -XX:+HeapDumpOnOutOfMemoryError</value>
+                </entry>
+              </manifest>
+            </mode>
+            <mode>
+              <name>pre</name>
+              <manifest>
+                <entry>
+                  <key>JVM-Args</key>
+                  <value>-Xmx512m -Xms512m -Xmn350m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+PrintGCDetails -XX:CMSFullGCsBeforeCompaction=5 -XX:+HeapDumpOnOutOfMemoryError</value>
+                </entry>
+              </manifest>
+            </mode>
+            <mode>
+              <name>prod</name>
+              <manifest>
+                <entry>
+                  <key>JVM-Args</key>
+                  <value>-Xmx2500m -Xms2500m -Xmn1500m -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+PrintGCDetails -XX:CMSFullGCsBeforeCompaction=5 -XX:+HeapDumpOnOutOfMemoryError</value>
+                </entry>
+              </manifest>
+            </mode>
+          </modes>
+
+          <!--从本地文件夹中复制文件-->
+          <fileSets>
+            <fileSet>
+              <directory>config/</directory>
+              <outputDirectory>config/</outputDirectory>
+              <includes>
+                <include>myconfig.yml</include>
+              </includes>
+            </fileSet>
+          </fileSets>
         </configuration>
       </plugin>
     </plugins>
