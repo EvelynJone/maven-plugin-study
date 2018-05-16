@@ -159,7 +159,108 @@
             </fileSet>
           </fileSets>
         </configuration>
+
       </plugin>
+
     </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <excludes>
+          <exclude>**/env/**</exclude>
+          <exclude>application.yml</exclude>
+          <exclude>systemconfig.properties</exclude>
+          <exclude>application.properties</exclude>
+          <exclude>**/pdfconfig/**</exclude>
+          <exclude>**/template/**</exclude>
+        </excludes>
+      </resource>
+    </resources>
+
   </build>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources/env/dev</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources/pdfconfig</directory>
+            <targetPath>/pdfconfig</targetPath>
+          </resource>
+          <resource>
+            <directory>src/main/resources/template</directory>
+            <targetPath>/template</targetPath>
+          </resource>
+        </resources>
+      </build>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>test</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources/env/test</directory>
+          </resource>
+
+          <resource>
+            <directory>src/main/resources/pdfconfig</directory>
+            <targetPath>/pdfconfig</targetPath>
+          </resource>
+          <resource>
+            <directory>src/main/resources/template</directory>
+            <targetPath>/template</targetPath>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+    <profile>
+      <id>pre</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources/env/pre</directory>
+          </resource>
+
+          <resource>
+            <directory>src/main/resources/pdfconfig</directory>
+            <targetPath>/pdfconfig</targetPath>
+          </resource>
+
+          <resource>
+            <directory>src/main/resources/template</directory>
+            <targetPath>/template</targetPath>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources/env/prod</directory>
+          </resource>
+
+          <resource>
+            <directory>src/main/resources/pdfconfig</directory>
+            <targetPath>/pdfconfig</targetPath>
+          </resource>
+
+          <resource>
+            <directory>src/main/resources/template</directory>
+            <targetPath>/template</targetPath>
+          </resource>
+
+        </resources>
+      </build>
+    </profile>
+  </profiles>
 </project>
